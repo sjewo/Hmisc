@@ -68,7 +68,8 @@ format.df <- function(x,
                       already.math.col.names=FALSE,
                       double.slash=FALSE,
                       format.Date='%m/%d/%Y',
-                      format.POSIXt="%m/%d/%Y %H:%M:%OS", ...)
+                      format.POSIXt="%m/%d/%Y %H:%M:%OS",
+                      decimal.mark=".", ...)
 {
   sl <- ifelse(double.slash, "\\\\", "\\")
 
@@ -117,17 +118,17 @@ format.df <- function(x,
     on.exit(options(oldopt))
   }
   
-  formt <- function(x, nsmall=0, scientific=c(-4,4), digits=NULL, na.blank=FALSE, ...) {
+  formt <- function(x, decimal.mark=decimal.mark, nsmall=0, scientific=c(-4,4), digits=NULL, na.blank=FALSE, ...) {
     y <- format(x, nsmall=nsmall, decimal.mark=decimal.mark,
                 digits=digits, ...)
-    if(decimal.mark != '.') y <- gsub('\\.', decimal.mark, y)
+    # if(decimal.mark != '.') y <- gsub('\\.', decimal.mark, y)
     if(na.blank) y <- ifelse(is.na(x), '', y)
     y
   }
   
   dot <- if(cdot && numeric.dollar)
     paste(sl,sl,'cdotp',sl,sl,'!',sep='')
-  else '.'
+  else decimal.mark
   
   decimal.point <- if(cdot && dcolumn)
     paste(sl,'cdot',sep='')
