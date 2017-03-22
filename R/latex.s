@@ -117,8 +117,7 @@ format.df <- function(x,
     on.exit(options(oldopt))
   }
   
-  formt <- function(x, decimal.mark='.', nsmall=0,
-                    scientific=c(-4,4), digits=NULL, na.blank=FALSE, ...) {
+  formt <- function(x, nsmall=0, scientific=c(-4,4), digits=NULL, na.blank=FALSE, ...) {
     y <- format(x, nsmall=nsmall, decimal.mark=decimal.mark,
                 digits=digits, ...)
     if(decimal.mark != '.') y <- gsub('\\.', decimal.mark, y)
